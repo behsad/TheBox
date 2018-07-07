@@ -77,10 +77,23 @@ public class BaseActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 }else if (id == R.id.mnu_account){
-//                    Intent intent = new Intent(getApplicationContext(),NewOrderActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(intent);
 
-                }else if (id== R.id.mnu_exit){
+                }else if (id== R.id.mnu_favorite){
+                    Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
+                    startActivity(intent);
+
+                }else if (id== R.id.mnu_share){
+
+                    //share app with optional choose
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_SUBJECT,"جعبه");
+                    intent.putExtra(Intent.EXTRA_TEXT,"با نصب جعبه میتونید محموله خود را ارسال کنید");
+
+                    startActivity(Intent.createChooser(intent,"یک برنامه را انتخاب کنید"));
+
 
                 }
                 drawer.closeDrawer(Gravity.RIGHT);

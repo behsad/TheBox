@@ -15,11 +15,15 @@
         android:id="@+id/mnu_account"
         android:icon="@drawable/myicon_userinfo"
         android:title="@string/navBar_userInfo" />
+    <item
+        android:id="@+id/mnu_favorite"
+        android:icon="@drawable/ic_filled_star"
+        android:title="@string/like_menu_text" />
 
     <item
-        android:id="@+id/mnu_exit"
+        android:id="@+id/mnu_share"
         android:icon="@drawable/ic_menu_share"
-        android:title="@string/navBar_exit" />
+        android:title="@string/share_menu_text" />
 
 
 </menu>

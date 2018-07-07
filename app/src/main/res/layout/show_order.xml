@@ -78,11 +78,11 @@
                 android:layout_margin="@dimen/my8dp"
                 android:background="@color/myTransparentBlack">
                 <TextView
-                    android:id="@+id/txt_showOrder_description"
                     style="@style/MyTextViewStyle"
                     android:textSize="@dimen/myLargeFont"
                     android:text="@string/showOrder_description_text" />
                 <TextView
+                    android:id="@+id/txt_showOrder_description"
                     android:paddingBottom="40dp"
                    style="@style/MyMediumTextViewStyle"
                     android:text="@string/dummyText"
@@ -95,7 +95,7 @@
     </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btn_floatCall"
+        android:id="@+id/btn_float_Call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"

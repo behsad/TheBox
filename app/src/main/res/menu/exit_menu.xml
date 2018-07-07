@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/mnu_exit"
+        android:id="@+id/mnu_share"
         android:icon="@drawable/ic_exit"
         android:title="@string/exit_menu_text"
         app:showAsAction="always">
