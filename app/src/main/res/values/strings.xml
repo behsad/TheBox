@@ -34,8 +34,19 @@
     <string name="newOrder_btn_text">ثبت سفارش</string>
 
 
+    <!--Account Login-->
+    <string name="login_phone_text">شماره همراه</string>
+    <string name="login_phone_number_guide_text">لطفا شماره همراه خود را جهت تایید اعتبار وارد کنید</string>
+    <string name="login_email_text">ایمیل (اختیاری)</string>
+    <string name="login_verifyCode_button_text">دریافت کد تایید</string>
+    <string name="login_enter_verifyCode_text">لطفا کد تایید را وارد کنید</string>
+    <string name="login_verifyCode_text">کد تایید</string>
+    <string name="login_submit_verifyCode_button_text">تایید نهایی</string>
+
+
     <!--Others-->
     <string name="help_menu_text">راهنما</string>
+    <string name="exit_menu_text">خروج</string>
 
 
 

@@ -76,7 +76,7 @@ public class BaseActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(),NewOrderActivity.class);
                     startActivity(intent);
 
-                }else if (id == R.id.mnu_userInfo){
+                }else if (id == R.id.mnu_account){
 //                    Intent intent = new Intent(getApplicationContext(),NewOrderActivity.class);
 //                    startActivity(intent);
 

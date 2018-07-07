@@ -35,6 +35,15 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/my18dpFont</item>
         <item name="android:textColor">@color/myGrey100</item>
+        <item name="android:textColorHint">@color/myGrey500</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:layout_margin">@dimen/my8dp</item>
+    </style>
+    <style name="MyTextViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/my18dpFont</item>
+        <item name="android:textColor">@color/myGrey100</item>
         <item name="android:typeface">monospace</item>
         <item name="android:layout_margin">@dimen/my8dp</item>
     </style>
@@ -58,6 +67,30 @@
         <item name="android:typeface">monospace</item>
         <item name="android:layout_margin">@dimen/my8dp</item>
         <item name="android:backgroundTint">@color/myGrey100</item>
+    </style>
+
+    <style name="MyNewOrderImagePreviewStyle">
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_margin">@dimen/my8dp</item>
+    </style>
+
+    <style name="MyNewOrderLinearLayoutStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_margin">@dimen/my8dp</item>
+        <item name="android:background">@color/myTransparentBlack</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="MySubmitButtonStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/my18dpFont</item>
+        <item name="android:textColor">@color/myGrey100</item>
+        <item name="android:layout_margin">@dimen/my8dp</item>
+        <item name="android:background">@drawable/gradient_bg2</item>
+        <item name="android:typeface">monospace</item>
     </style>
 
 

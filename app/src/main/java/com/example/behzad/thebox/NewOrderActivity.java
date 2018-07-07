@@ -32,6 +32,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class NewOrderActivity extends BaseActivity {
@@ -45,6 +46,8 @@ public class NewOrderActivity extends BaseActivity {
 
     int current_image;
     Uri uri;
+
+    Boolean[] fill_images = new Boolean[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,30 +142,42 @@ public class NewOrderActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 current_image = 0;
-                show_dialog();
+                if (!fill_images[current_image]) {
+                    show_dialog();
+                }
+                else {
+                    show_delete_dialog();
+                }
             }
         });
         images.get(1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 current_image = 1;
-                show_dialog();
+                if (!fill_images[current_image]) {
+                    show_dialog();
+                }
+                else {
+                    show_delete_dialog();
+                }
             }
         });
         images.get(2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 current_image = 2;
-                show_dialog();
+                if (!fill_images[current_image]) {
+                    show_dialog();
+                }
+                else {
+                    show_delete_dialog();
+                }
 
             }
         });
 
-
-
-
-
 //----------------------------------End-----------------------------------------
+        Arrays.fill(fill_images,false);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -204,8 +219,8 @@ public class NewOrderActivity extends BaseActivity {
 
                 if(i==0){
                     //gallery
-                    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                    StrictMode.setVmPolicy(builder.build());
+//                    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//                    StrictMode.setVmPolicy(builder.build());
                     Intent gallery_intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(Intent.createChooser(gallery_intent,"لطفا یک عکس را انتخاب کنید"),2);
                 }
@@ -234,6 +249,31 @@ public class NewOrderActivity extends BaseActivity {
         builder.show();
 
     }
+//-----------------------------SHOW DELETE DIALOG FOR IMAGE-----------------------------
+    public void show_delete_dialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(NewOrderActivity.this);
+
+        builder.setMessage("حذف کردن عکس؟");
+        builder.setPositiveButton("بله", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                images.get(current_image).setImageResource(R.drawable.ic_add_image);
+                fill_images[current_image]=false;
+
+            }
+        });
+        builder.setNegativeButton("نه", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+//----------------------------------------End----------------------------------------------
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == 1 && resultCode == RESULT_OK){
@@ -251,6 +291,7 @@ public class NewOrderActivity extends BaseActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             Uri resultUri =result.getUri();
             images.get(current_image).setImageURI(resultUri);
+            fill_images[current_image]=true;
         }
     }
 

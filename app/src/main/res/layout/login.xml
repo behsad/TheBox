@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/mybg"
+    android:layout_marginTop="?attr/actionBarSize">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/MyNewOrderLinearLayoutStyle">
+
+                <TextView
+                    style="@style/MyTextViewStyle"
+                    android:text="@string/login_phone_number_guide_text"/>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txt_login_phoneNumber"
+                    style="@style/MyNewOrderStyle">
+
+                <EditText
+                    style="@style/MyNewOrderEditTextStyle"
+                    android:hint="@string/login_phone_text"
+                    android:inputType="phone"
+                    android:maxLength="11" />
+
+                </android.support.design.widget.TextInputLayout><android.support.design.widget.TextInputLayout
+                android:id="@+id/txt_login_email"
+                style="@style/MyNewOrderStyle">
+
+                <EditText
+                    style="@style/MyNewOrderEditTextStyle"
+                    android:hint="@string/login_email_text" />
+            </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_receive_verifyCode"
+                style="@style/MySubmitButtonStyle"
+                android:text="@string/login_verifyCode_button_text"/>
+
+            <LinearLayout
+                style="@style/MyNewOrderLinearLayoutStyle"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/MyTextViewStyle"
+                    android:text="@string/login_enter_verifyCode_text"/>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edt_login_verify"
+                    style="@style/MyNewOrderStyle">
+
+                    <EditText
+                        style="@style/MyNewOrderEditTextStyle"
+                        android:hint="@string/login_verifyCode_text"
+                        android:inputType="number"
+                        android:maxLength="4" />
+
+                </android.support.design.widget.TextInputLayout>
+                <Button
+                    android:id="@+id/btn_submit_verifyCode"
+                    style="@style/MySubmitButtonStyle"
+                    android:text="@string/login_submit_verifyCode_button_text"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

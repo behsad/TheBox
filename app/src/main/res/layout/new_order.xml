@@ -15,12 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/my8dp"
-                android:background="@color/myTransparentBlack"
-                android:orientation="vertical">
+            <LinearLayout style="@style/MyNewOrderLinearLayoutStyle">
 
                 <TextView
                     style="@style/MyNewOrderStyle"
@@ -34,42 +29,27 @@
 
                     <ImageView
                         android:id="@+id/img_selectImage1"
-                        android:layout_width="@dimen/myNewOrderImagePreview"
-                        android:layout_height="@dimen/myNewOrderImagePreview"
-                        android:layout_margin="@dimen/my8dp"
+                        style="@style/MyNewOrderImagePreviewStyle"
                         android:src="@drawable/ic_add_image" />
 
                     <ImageView
                         android:id="@+id/img_selectImage2"
-                        android:layout_width="@dimen/myNewOrderImagePreview"
-                        android:layout_height="@dimen/myNewOrderImagePreview"
-                        android:layout_margin="@dimen/my8dp"
+                        style="@style/MyNewOrderImagePreviewStyle"
                         android:src="@drawable/ic_add_image" />
 
                     <ImageView
                         android:id="@+id/img_selectImage3"
-                        android:layout_width="@dimen/myNewOrderImagePreview"
-                        android:layout_height="@dimen/myNewOrderImagePreview"
-                        android:layout_margin="@dimen/my8dp"
+                        style="@style/MyNewOrderImagePreviewStyle"
                         android:src="@drawable/ic_add_image" />
                 </LinearLayout>
 
-
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/my8dp"
-                android:background="@color/myTransparentBlack"
-                android:orientation="vertical">
+            <LinearLayout style="@style/MyNewOrderLinearLayoutStyle">
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/txt_newOrder_title"
-                    style="@style/MyNewOrderStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/myGrey50">
+                    android:id="@+id/edt_newOrder_title"
+                    style="@style/MyNewOrderStyle">
 
 
                     <EditText
@@ -80,34 +60,22 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/txt_newOrder_description"
-                    style="@style/MyNewOrderStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/myGrey50">
+                    android:id="@+id/edt_newOrder_description"
+                    style="@style/MyNewOrderStyle">
 
 
                     <EditText
                         style="@style/MyNewOrderStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:backgroundTint="@color/myGrey50"
                         android:gravity="right"
                         android:hint="@string/newOrder_description"
                         android:maxLines="10" />
 
-
                 </android.support.design.widget.TextInputLayout>
-
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/my8dp"
-                android:background="@color/myTransparentBlack"
-                android:orientation="vertical">
+            <LinearLayout style="@style/MyNewOrderLinearLayoutStyle">
 
                 <TextView
                     style="@style/MyNewOrderStyle"
@@ -120,7 +88,6 @@
                     <!--android:layout_height="wrap_content"-->
                     <!--android:layout_margin="@dimen/my8dp"-->
                     <!--android:backgroundTint="@color/myGrey50"-->
-
                 </Spinner>
 
                 <Spinner
@@ -130,11 +97,8 @@
                 </Spinner>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/txt_newOrder_address"
-                    style="@style/MyNewOrderStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/myGrey50">
+                    android:id="@+id/edt_newOrder_address"
+                    style="@style/MyNewOrderStyle">
 
 
                     <EditText
@@ -143,12 +107,7 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/my8dp"
-                android:background="@color/myTransparentBlack"
-                android:orientation="vertical">
+            <LinearLayout style="@style/MyNewOrderLinearLayoutStyle">
 
                 <TextView
                     style="@style/MyNewOrderStyle"
@@ -160,15 +119,9 @@
 
                 </Spinner>
 
-
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/my8dp"
-                android:background="@color/myTransparentBlack"
-                android:orientation="vertical">
+            <LinearLayout style="@style/MyNewOrderLinearLayoutStyle">
 
                 <TextView
                     style="@style/MyNewOrderStyle"
@@ -181,27 +134,19 @@
                 </Spinner>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/txt_newOrder_price"
-                    style="@style/MyNewOrderStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/myGrey50">
-
+                    android:id="@+id/edt_newOrder_price"
+                    style="@style/MyNewOrderStyle">
 
                     <EditText
                         style="@style/MyNewOrderEditTextStyle"
                         android:hint="@string/newOrder_price_text" />
                 </android.support.design.widget.TextInputLayout>
 
-
             </LinearLayout>
 
             <Button
-                style="@style/MyNewOrderStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/my8dp"
-                android:background="@drawable/gradient_bg2"
+                android:id="@+id/btn_submit_order"
+                style="@style/MySubmitButtonStyle"
                 android:text="@string/newOrder_btn_text" />
 
         </LinearLayout>

@@ -34,8 +34,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Behzad\Desktop\ic_add_image.png" />
-                                      <entry key="outputName" value="ic_add_image" />
+                                      <entry key="imageAsset" value="C:\Users\Behzad\Desktop\ic_exit.png" />
+                                      <entry key="outputName" value="ic_exit" />
                                       <entry key="theme" value="HOLO_DARK" />
                                     </map>
                                   </option>

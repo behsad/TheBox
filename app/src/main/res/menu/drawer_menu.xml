@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_menu_send"
         android:title="@string/navBar_newOrder" />
     <item
-        android:id="@+id/mnu_userInfo"
+        android:id="@+id/mnu_account"
         android:icon="@drawable/myicon_userinfo"
         android:title="@string/navBar_userInfo" />
 
