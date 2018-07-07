@@ -1,0 +1,64 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyNavBarFontStyle">
+    <item name="android:textSize">@dimen/mySmallFont</item>
+    <item name="android:typeface">monospace</item>
+</style>
+
+    <style name="MyFilterBarFontStyle">
+        <item name="android:textSize">@dimen/my18dpFont</item>
+        <item name="android:textColor">@color/myGrey100</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+
+                <!--NEW ORDERS PAGE STYLES-->
+    <style name="MyNewOrderStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/my18dpFont</item>
+        <item name="android:textColor">@color/myGrey100</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:layout_margin">@dimen/my8dp</item>
+    </style>
+    <style name="MyNewOrderEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/my18dpFont</item>
+        <item name="android:textColor">@color/myGrey100</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:gravity">right</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:backgroundTint">@color/myGrey100</item>
+    </style>
+
+    <style name="MyNewOrderSpinnerStyle">
+        <item name="android:background">@drawable/abc_spinner_textfield_background_material</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/my18dpFont</item>
+        <item name="android:textColor">@color/myGrey100</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:layout_margin">@dimen/my8dp</item>
+        <item name="android:backgroundTint">@color/myGrey100</item>
+    </style>
+
+
+</resources>

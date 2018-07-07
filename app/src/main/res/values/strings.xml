@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">The Box</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="app_description">سامانه هوشمند حمل بار</string>
+
+    <!--NavBar Strings-->
+    <string name="navBar_orders">سفارش ها</string>
+    <string name="navBar_newOrder">ثبت سفارش</string>
+    <string name="navBar_userInfo">اطلاعات کاربری</string>
+    <string name="navBar_exit">خروج</string>
+
+
+
+    <!--Filter-->
+    <string name="location_text">همه استان ها</string>
+    <string name="CarType_text">همه وسایل</string>
+
+
+    <!--New Order-->
+    <string name="newOrder_pick_your_image_guide_text">انتخاب عکس برای سفارش :</string>
+    <string name="newOrder_title">عنوان</string>
+    <string name="newOrder_description">توضیحات</string>
+    <string name="newOrder_address_text">*استان و شهر مورد نظر را انتخاب کنید</string>
+    <string name="newOrder_address">آدرس</string>
+    <string name="newOrder_carType">*نوع ماشین مورد نیاز خود را انتخاب کنید</string>
+    <string name="newOrder_priceType">*قیمت گذاری</string>
+    <string name="newOrder_price_text">قیمت</string>
+    <string name="newOrder_btn_text">ثبت سفارش</string>
+
+
+    <!--Others-->
+    <string name="help_menu_text">راهنما</string>
+
+
+
+
+</resources>

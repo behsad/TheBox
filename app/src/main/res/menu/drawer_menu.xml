@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/mnu_orders"
+        android:icon="@drawable/myicon_orders"
+        android:title="@string/navBar_orders" />
+
+    <item
+        android:id="@+id/mnu_newOrder"
+        android:icon="@drawable/ic_menu_send"
+        android:title="@string/navBar_newOrder" />
+    <item
+        android:id="@+id/mnu_userInfo"
+        android:icon="@drawable/myicon_userinfo"
+        android:title="@string/navBar_userInfo" />
+
+    <item
+        android:id="@+id/mnu_exit"
+        android:icon="@drawable/ic_menu_share"
+        android:title="@string/navBar_exit" />
+
+
+</menu>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="carType">
+        <item>انتخاب نوع ماشین</item>
+        <item>خاور</item>
+        <item>تریلی</item>
+        <item>نیسان</item>
+        <item>پیک</item>
+
+    </string-array>
+
+    <string-array name="price_type">
+
+        <item>بدون قیمت</item>
+        <item>توافقی</item>
+        <item>مقطوع</item>
+
+
+    </string-array>
+
+    <string-array name="province">
+
+        <item>- انتخاب استان -</item>
+        <item>آذربایجان شرقی</item>
+        <item>آذربایجان غربی</item>
+        <item>اردبیل</item>
+        <item>اصفهان</item>
+        <item>البرز</item>
+        <item>ایلام</item>
+        <item>بوشهر</item>
+        <item>تهران</item>
+        <item>چهار محال و بختیاری</item>
+        <item>خراسان جنوبی</item>
+        <item>خراسان رضوی</item>
+        <item>خراسان شمالی</item>
+        <item>خوزستان</item>
+        <item>زنجان</item>
+        <item>سمنان</item>
+        <item>سیستان و بلوچستان</item>
+        <item>فارس</item>
+        <item>قزوین</item>
+        <item>قم</item>
+        <item>کردستان</item>
+        <item>کرمان</item>
+        <item>کرمانشاه</item>
+        <item>کهکیلویه و بویراحمد</item>
+        <item>گلستان</item>
+        <item>گیلان</item>
+        <item>لرستان</item>
+        <item>مازندران</item>
+        <item>مرکزی</item>
+        <item>هرمزگان</item>
+        <item>همدان</item>
+        <item>یزد</item>
+
+    </string-array>
+
+
+    <string-array name="city0">
+        <item>- انتخاب شهر -</item>
+
+    </string-array>
+
+
+    <string-array name="city1">
+        <item>- انتخاب شهر -</item>
+        <item>تبریز</item>
+
+    </string-array>
+
+    <string-array name="city2">
+        <item>- انتخاب شهر -</item>
+        <item>ارومیه</item>
+
+    </string-array>
+
+    <string-array name="city3">
+        <item>- انتخاب شهر -</item>
+        <item>اردبیل</item>
+
+    </string-array>
+
+
+    <string-array name="city4">
+        <item>- انتخاب شهر -</item>
+        <item>اصفهان</item>
+        <item>کاشان</item>
+
+    </string-array>
+
+    <string-array name="city5">
+        <item>- انتخاب شهر -</item>
+        <item>کرج</item>
+
+    </string-array>
+
+
+    <string-array name="city6">
+        <item>- انتخاب شهر -</item>
+        <item>ایلام</item>
+
+    </string-array>
+
+    <string-array name="city7">
+        <item>- انتخاب شهر -</item>
+        <item>بوشهر</item>
+
+    </string-array>
+
+    <string-array name="city8">
+        <item>- انتخاب شهر -</item>
+        <item>تهران</item>
+        <item>شهر ری</item>
+        <item>اسلام شهر</item>
+
+    </string-array>
+
+    <string-array name="city9">
+        <item>- انتخاب شهر -</item>
+        <item>شهرکرد</item>
+
+    </string-array>
+
+    <string-array name="city10">
+        <item>- انتخاب شهر -</item>
+        <item>بیرجند</item>
+
+    </string-array>
+
+    <string-array name="city11">
+        <item>- انتخاب شهر -</item>
+        <item>مشهد</item>
+
+    </string-array>
+
+    <string-array name="city12">
+        <item>- انتخاب شهر -</item>
+        <item>بجنورد</item>
+
+    </string-array>
+
+    <string-array name="city13">
+        <item>- انتخاب شهر -</item>
+        <item>اهواز</item>
+
+    </string-array>
+
+    <string-array name="city14">
+        <item>- انتخاب شهر -</item>
+        <item>زنجان</item>
+
+    </string-array>
+
+    <string-array name="city15">
+        <item>- انتخاب شهر -</item>
+        <item>سمنان</item>
+
+    </string-array>
+
+    <string-array name="city16">
+        <item>- انتخاب شهر -</item>
+        <item>زاهدان</item>
+
+    </string-array>
+
+    <string-array name="city17">
+        <item>- انتخاب شهر -</item>
+        <item>شیراز</item>
+
+    </string-array>
+
+    <string-array name="city18">
+        <item>- انتخاب شهر -</item>
+        <item>قزوین</item>
+
+    </string-array>
+
+    <string-array name="city19">
+        <item>- انتخاب شهر -</item>
+        <item>قم</item>
+
+    </string-array>
+
+    <string-array name="city20">
+        <item>- انتخاب شهر -</item>
+        <item>سنندج</item>
+
+    </string-array>
+
+    <string-array name="city21">
+        <item>- انتخاب شهر -</item>
+        <item>کرمان</item>
+
+    </string-array>
+
+    <string-array name="city22">
+        <item>- انتخاب شهر -</item>
+        <item>کرمانشاه</item>
+
+    </string-array>
+
+    <string-array name="city23">
+        <item>- انتخاب شهر -</item>
+        <item>یاسوج</item>
+
+    </string-array>
+
+    <string-array name="city24">
+        <item>- انتخاب شهر -</item>
+        <item>گرگان</item>
+
+    </string-array>
+
+    <string-array name="city25">
+        <item>- انتخاب شهر -</item>
+        <item>رشت</item>
+        <item>انزلی</item>
+        <item>لاهیجان</item>
+        <item>رودبار</item>
+
+    </string-array>
+
+    <string-array name="city26">
+        <item>- انتخاب شهر -</item>
+        <item>خرم آباد</item>
+
+    </string-array>
+
+    <string-array name="city27">
+        <item>- انتخاب شهر -</item>
+        <item>ساری</item>
+
+    </string-array>
+
+    <string-array name="city28">
+        <item>- انتخاب شهر -</item>
+        <item>اراک</item>
+
+    </string-array>
+
+    <string-array name="city29">
+        <item>- انتخاب شهر -</item>
+        <item>بندرعباس</item>
+
+    </string-array>
+
+    <string-array name="city30">
+        <item>- انتخاب شهر -</item>
+        <item>همدان</item>
+
+    </string-array>
+
+    <string-array name="city31">
+        <item>- انتخاب شهر -</item>
+        <item>یزد</item>
+
+    </string-array>
+
+</resources>

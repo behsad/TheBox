@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="@drawable/mybg">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/my8dp"
+                android:background="@color/myTransparentBlack"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/MyNewOrderStyle"
+                    android:text="@string/newOrder_pick_your_image_guide_text" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/img_selectImage1"
+                        android:layout_width="@dimen/myNewOrderImagePreview"
+                        android:layout_height="@dimen/myNewOrderImagePreview"
+                        android:layout_margin="@dimen/my8dp"
+                        android:src="@drawable/ic_add_image" />
+
+                    <ImageView
+                        android:id="@+id/img_selectImage2"
+                        android:layout_width="@dimen/myNewOrderImagePreview"
+                        android:layout_height="@dimen/myNewOrderImagePreview"
+                        android:layout_margin="@dimen/my8dp"
+                        android:src="@drawable/ic_add_image" />
+
+                    <ImageView
+                        android:id="@+id/img_selectImage3"
+                        android:layout_width="@dimen/myNewOrderImagePreview"
+                        android:layout_height="@dimen/myNewOrderImagePreview"
+                        android:layout_margin="@dimen/my8dp"
+                        android:src="@drawable/ic_add_image" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/my8dp"
+                android:background="@color/myTransparentBlack"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txt_newOrder_title"
+                    style="@style/MyNewOrderStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/myGrey50">
+
+
+                    <EditText
+                        style="@style/MyNewOrderEditTextStyle"
+                        android:hint="@string/newOrder_title" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txt_newOrder_description"
+                    style="@style/MyNewOrderStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/myGrey50">
+
+
+                    <EditText
+                        style="@style/MyNewOrderStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/myGrey50"
+                        android:gravity="right"
+                        android:hint="@string/newOrder_description"
+                        android:maxLines="10" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/my8dp"
+                android:background="@color/myTransparentBlack"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/MyNewOrderStyle"
+                    android:text="@string/newOrder_address_text" />
+
+                <Spinner
+                    android:id="@+id/spn_province"
+                    style="@style/MyNewOrderSpinnerStyle">
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="@dimen/my8dp"-->
+                    <!--android:backgroundTint="@color/myGrey50"-->
+
+                </Spinner>
+
+                <Spinner
+                    android:id="@+id/spn_city"
+                    style="@style/MyNewOrderSpinnerStyle">
+
+                </Spinner>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txt_newOrder_address"
+                    style="@style/MyNewOrderStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/myGrey50">
+
+
+                    <EditText
+                        style="@style/MyNewOrderEditTextStyle"
+                        android:hint="@string/newOrder_address" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/my8dp"
+                android:background="@color/myTransparentBlack"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/MyNewOrderStyle"
+                    android:text="@string/newOrder_carType" />
+
+                <Spinner
+                    android:id="@+id/spn_carType"
+                    style="@style/MyNewOrderSpinnerStyle">
+
+                </Spinner>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/my8dp"
+                android:background="@color/myTransparentBlack"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/MyNewOrderStyle"
+                    android:text="@string/newOrder_priceType" />
+
+                <Spinner
+                    android:id="@+id/spn_priceType"
+                    style="@style/MyNewOrderSpinnerStyle">
+
+                </Spinner>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txt_newOrder_price"
+                    style="@style/MyNewOrderStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/myGrey50">
+
+
+                    <EditText
+                        style="@style/MyNewOrderEditTextStyle"
+                        android:hint="@string/newOrder_price_text" />
+                </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <Button
+                style="@style/MyNewOrderStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/my8dp"
+                android:background="@drawable/gradient_bg2"
+                android:text="@string/newOrder_btn_text" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
