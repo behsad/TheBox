@@ -27,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.theartofdev.edmodo.cropper.CropImage;
+
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class NewOrderActivity extends BaseActivity {
     ArrayList<ImageView> images = new ArrayList<ImageView>();
 
     int current_image;
+    Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,7 +221,7 @@ public class NewOrderActivity extends BaseActivity {
 
                     Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     File file = new File(Environment.getExternalStorageDirectory(),"file"+String.valueOf(System.currentTimeMillis())+".jpg");
-                    Uri uri = Uri.fromFile(file);
+                    uri = Uri.fromFile(file);
                     camera_intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
                     camera_intent.putExtra("return-data",true);
                     startActivityForResult(camera_intent,1);
@@ -235,9 +238,19 @@ public class NewOrderActivity extends BaseActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == 1 && resultCode == RESULT_OK){
             //camera
+
+            //set image size by CropImage library
+            CropImage.activity(uri).setAspectRatio(1,1).setRequestedSize(512,512).start(this);
         }
         else if(requestCode == 2 && resultCode == RESULT_OK){
             //gallery
+            uri=data.getData();
+            CropImage.activity(uri).setAspectRatio(1,1).setRequestedSize(512,512).start(this);
+        }
+        else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE&&resultCode == RESULT_OK){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            Uri resultUri =result.getUri();
+            images.get(current_image).setImageURI(resultUri);
         }
     }
 
