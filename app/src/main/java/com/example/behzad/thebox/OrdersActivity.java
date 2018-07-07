@@ -56,7 +56,7 @@ public class OrdersActivity extends BaseActivity {
         temp_ad.ad_title = "عنوان آگهی";
         temp_ad.ad_location = "رشت";
         temp_ad.ad_price = "12 تومان";
-        temp_ad.ad_image = "https://findicons.com/files/icons/1675/sketchy/128/box.png";
+        temp_ad.ad_image = "http://www.upsara.com/images/5lbx_logoo2.png";
 
         data_list.add(temp_ad);
         data_list.add(temp_ad);
@@ -79,7 +79,7 @@ public class OrdersActivity extends BaseActivity {
                 temp_ad.ad_title = "عنوان آگهی دوم";
                 temp_ad.ad_location = "تهران";
                 temp_ad.ad_price = "100 تومان";
-                temp_ad.ad_image = "https://findicons.com/files/icons/1675/sketchy/128/box.png";
+                temp_ad.ad_image = "http://www.upsara.com/images/5lbx_logoo2.png";
 
                 adapter.insert(adapter.getItemCount(),temp_ad);
 

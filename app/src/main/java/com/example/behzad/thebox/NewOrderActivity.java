@@ -234,12 +234,12 @@ public class NewOrderActivity extends BaseActivity {
 
 
 
-                    Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File file = new File(Environment.getExternalStorageDirectory(),"file"+String.valueOf(System.currentTimeMillis())+".jpg");
-                    uri = Uri.fromFile(file);
-                    camera_intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
-                    camera_intent.putExtra("return-data",true);
-                    startActivityForResult(camera_intent,1);
+//                    Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    File file = new File(Environment.getExternalStorageDirectory(),"file"+String.valueOf(System.currentTimeMillis())+".jpg");
+//                    uri = Uri.fromFile(file);
+//                    camera_intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
+//                    camera_intent.putExtra("return-data",true);
+//                    startActivityForResult(camera_intent,1);
 
                 }
 

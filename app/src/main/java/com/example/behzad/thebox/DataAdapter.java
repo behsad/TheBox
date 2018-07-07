@@ -1,8 +1,10 @@
 package com.example.behzad.thebox;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +43,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         holder.txt_orderPrice.setText(data_list.get(position).ad_price);
 
         //picasso.with(context) 19:00 E09 Sheypor.
-        Picasso.get().load(data_list.get(position).ad_image).resize(128,128).into(holder.img_preview);
+        Picasso.with(context).load(data_list.get(position).ad_image).resize(128,128).into(holder.img_preview);
 
 
         if(position >= getItemCount()-1){
@@ -60,6 +62,17 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
                }
            },1);
         }
+
+        holder.cardV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context,ShowOrderActivity.class);
+                //--chon context dar yek class dige hast bayad in code ro ezafe bokonim
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //--
+                context.startActivity(i);
+            }
+        });
 
     }
 
@@ -81,6 +94,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         TextView txt_orderLocation;
         ImageView img_preview;
 
+        CardView cardV;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -88,6 +103,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             txt_orderPrice = (TextView)itemView.findViewById(R.id.txt_order_price);
             txt_orderLocation = (TextView)itemView.findViewById(R.id.txt_order_location);
             img_preview = (ImageView) itemView.findViewById(R.id.img_preview);
+            cardV = (CardView) itemView.findViewById(R.id.cardV);
         }
     }
 }

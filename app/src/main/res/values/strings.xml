@@ -47,7 +47,19 @@
     <!--Others-->
     <string name="help_menu_text">راهنما</string>
     <string name="exit_menu_text">خروج</string>
+    <string name="like_menu_text">علاقه مندی ها</string>
+    <string name="share_menu_text">اشتراک گذاری</string>
+    
+    <string name="dummyText">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</string>
 
+
+    <!--Show Orders-->
+    <string name="showOrder_location_text">محل بارگیری</string>
+    <string name="showOrder_CarType_text">نوع ماشین  </string>
+    <string name="showOrder_price_text">هزینه   </string>
+    <string name="showOrder_description_text">توضیحات</string>
+    
+    
 
 
 

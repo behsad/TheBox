@@ -39,14 +39,7 @@
         <item name="android:typeface">monospace</item>
         <item name="android:layout_margin">@dimen/my8dp</item>
     </style>
-    <style name="MyTextViewStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/my18dpFont</item>
-        <item name="android:textColor">@color/myGrey100</item>
-        <item name="android:typeface">monospace</item>
-        <item name="android:layout_margin">@dimen/my8dp</item>
-    </style>
+
     <style name="MyNewOrderEditTextStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -92,6 +85,40 @@
         <item name="android:background">@drawable/gradient_bg2</item>
         <item name="android:typeface">monospace</item>
     </style>
+
+
+    <style name="MyTextViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/my18dpFont</item>
+        <item name="android:textColor">@color/myGrey100</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:layout_margin">@dimen/my8dp</item>
+    </style>
+                       <!-- Show Order-->
+    <style name="MyMiniTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/my18dpFont</item>
+        <item name="android:textColor">@color/myGrey500</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:layout_margin">@dimen/my8dp</item>
+    </style>
+    <style name="MyMediumTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/my18dpFont</item>
+        <item name="android:textColor">@color/myGrey50</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:layout_margin">@dimen/my4dp</item>
+    </style>
+    <style name="MyShowLinearLayoutStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_margin">@dimen/my8dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
 
 
 </resources>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/mybg"
+    android:layout_marginTop="?attr/actionBarSize">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                />
+
+            <TextView
+                android:id="@+id/txt_showOrder_title"
+                style="@style/MyTextViewStyle"
+                android:textSize="@dimen/myLargeFont"
+                android:text="بار چوب به رشت"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/my8dp"
+                android:background="@color/myTransparentBlack">
+
+                <LinearLayout
+                style="@style/MyShowLinearLayoutStyle"
+                android:orientation="horizontal"
+                android:gravity="right">
+                <TextView
+                    android:id="@+id/txt_showOrder_location"
+                    style="@style/MyMediumTextViewStyle"
+                    android:text="رشت" />
+                <TextView
+                    style="@style/MyMiniTextViewStyle"
+                    android:text="@string/showOrder_location_text" />
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/MyShowLinearLayoutStyle"
+                    android:orientation="horizontal"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/txt_showOrder_carType"
+                        style="@style/MyMediumTextViewStyle"
+                        android:text="نیسان" />
+                    <TextView
+                        style="@style/MyMiniTextViewStyle"
+                        android:text="@string/showOrder_CarType_text" />
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/MyShowLinearLayoutStyle"
+                    android:orientation="horizontal"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/txt_showOrder_price"
+                        style="@style/MyMediumTextViewStyle"
+                        android:text="5000 تومان" />
+                    <TextView
+                        style="@style/MyMiniTextViewStyle"
+                        android:text="@string/showOrder_price_text" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/my8dp"
+                android:background="@color/myTransparentBlack">
+                <TextView
+                    android:id="@+id/txt_showOrder_description"
+                    style="@style/MyTextViewStyle"
+                    android:textSize="@dimen/myLargeFont"
+                    android:text="@string/showOrder_description_text" />
+                <TextView
+                    android:paddingBottom="40dp"
+                   style="@style/MyMediumTextViewStyle"
+                    android:text="@string/dummyText"
+                    android:textColor="@color/myGrey500"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_floatCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="@dimen/my16dp"
+        android:src="@drawable/ic_call"/>
+
+
+</android.support.design.widget.CoordinatorLayout>
