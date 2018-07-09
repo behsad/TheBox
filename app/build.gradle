@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    useLibrary 'org.apache.http.legacy'
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.behzad.thebox"
@@ -34,5 +36,8 @@ dependencies {
 
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.daimajia.slider:library:1.1.5@aar'
+
+    implementation 'org.apache.httpcomponents:httpcore:4.4.1'
+//    implementation 'org.apache.httpcomponents:httpclient:4.5'
 }
 

@@ -1,11 +1,15 @@
 package com.example.behzad.thebox;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,6 +22,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -29,9 +34,20 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
@@ -57,6 +73,8 @@ public class NewOrderActivity extends BaseActivity {
 
     Button submit_bt;
 
+    String image_base64;
+
 
     ArrayList<ImageView> images = new ArrayList<ImageView>();
 
@@ -64,6 +82,7 @@ public class NewOrderActivity extends BaseActivity {
     Uri uri;
 
     Boolean[] fill_images = new Boolean[3];
+    String[] address_images = new String[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,6 +222,7 @@ public class NewOrderActivity extends BaseActivity {
         });
 
         Arrays.fill(fill_images,false);
+        Arrays.fill(address_images,"");
 //----------------------------------End-----------------------------------------
 
 
@@ -274,25 +294,25 @@ public class NewOrderActivity extends BaseActivity {
 
                 //car type Spinner validation
                 if(spn_carType.getSelectedItemPosition()==0){
-
+                    is_validate=false;
                     ((TextView)spn_carType.getSelectedView()).setError("");
 
                 }
                 //province Spinner validation
                 if(spn_province.getSelectedItemPosition()==0){
-
+                    is_validate=false;
                     ((TextView)spn_province.getSelectedView()).setError("");
 
                 }
                 //city Spinner validation
                 if(spn_city.getSelectedItemPosition()==0){
-
+                    is_validate=false;
                     ((TextView)spn_city.getSelectedView()).setError("");
 
                 }
                 //price type Spinner validation
                 if(spn_priceType.getSelectedItemPosition()==0){
-
+                    is_validate=false;
                     ((TextView)spn_priceType.getSelectedView()).setError("");
 
                 }
@@ -312,6 +332,18 @@ public class NewOrderActivity extends BaseActivity {
 
                 else {
                     price_layout.setErrorEnabled(true);
+                }
+
+
+                //for test
+                is_validate = true;
+
+                if(is_validate){
+
+
+
+                }else {
+                    Toast.makeText(getApplicationContext(),"خطا در ورود اطلاعات",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -432,6 +464,98 @@ public class NewOrderActivity extends BaseActivity {
             Uri resultUri =result.getUri();
             images.get(current_image).setImageURI(resultUri);
             fill_images[current_image]=true;
+
+
+
+
+            BitmapDrawable bd =((BitmapDrawable) images.get(current_image).getDrawable());
+            Bitmap bm = bd.getBitmap();
+
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG,90,bao);
+            //convert image to base64
+            image_base64 = Base64.encodeToString(bao.toByteArray(),Base64.DEFAULT);
+            new upload_image().execute();
+
+
+
+
+        }
+    }
+
+
+
+    public class  upload_image extends AsyncTask<Void,Void,String>{
+
+        ProgressDialog pd = new ProgressDialog(NewOrderActivity.this);
+
+        protected void onPreExecute(){
+            super.onPreExecute();
+            pd.setMessage("لطفا صبر کنید");
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("image",image_base64));
+
+            try {
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost("http://192.168.43.38/thebox/command.php");
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                String response = EntityUtils.toString(httpResponse.getEntity());
+
+               if(response.startsWith("<thebox>")&&response.endsWith("</thebox>"))
+               {//response is valid
+
+                    response = response.replace("<thebox>","").replace("</thebox>","");
+                    if(!response.trim().equals("0"))
+                    {// upload ok
+
+                        address_images[current_image] = response.trim();
+
+                    }else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getBaseContext(),"خطا در آپلود تصویر",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
+               }else {
+                   //error
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getBaseContext(),"خطا در آپلود تصویر",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                images.get(current_image).setImageResource(R.drawable.ic_add_image);
+                fill_images[current_image] = false;
+
+
+               }
+
+
+            }catch (Exception e){
+
+            }
+
+
+            return null;
+        }
+
+        protected void  onPostExecute(String result){
+            super.onPostExecute(result);
+            pd.hide();
+            pd.dismiss();
         }
     }
 
