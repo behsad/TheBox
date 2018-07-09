@@ -48,11 +48,12 @@
             <LinearLayout style="@style/MyNewOrderLinearLayoutStyle">
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/edt_newOrder_title"
+                    android:id="@+id/edtLayout_newOrder_title"
                     style="@style/MyNewOrderStyle">
 
 
                     <EditText
+                        android:id="@+id/edt_newOrder_title"
                         style="@style/MyNewOrderEditTextStyle"
                         android:hint="@string/newOrder_title" />
 
@@ -60,11 +61,12 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/edt_newOrder_description"
+                    android:id="@+id/edtLayout_newOrder_description"
                     style="@style/MyNewOrderStyle">
 
 
                     <EditText
+                        android:id="@+id/edt_newOrder_description"
                         style="@style/MyNewOrderStyle"
                         android:backgroundTint="@color/myGrey50"
                         android:gravity="right"
@@ -97,11 +99,12 @@
                 </Spinner>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/edt_newOrder_address"
+                    android:id="@+id/edtLayout_newOrder_district"
                     style="@style/MyNewOrderStyle">
 
 
                     <EditText
+                        android:id="@+id/edt_newOrder_district"
                         style="@style/MyNewOrderEditTextStyle"
                         android:hint="@string/newOrder_address" />
                 </android.support.design.widget.TextInputLayout>
@@ -134,11 +137,13 @@
                 </Spinner>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/edt_newOrder_price"
+                    android:id="@+id/edtLayout_newOrder_price"
                     style="@style/MyNewOrderStyle">
 
                     <EditText
+                        android:id="@+id/edt_newOrder_price"
                         style="@style/MyNewOrderEditTextStyle"
+                        android:inputType="number"
                         android:hint="@string/newOrder_price_text" />
                 </android.support.design.widget.TextInputLayout>
 

@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -22,6 +23,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -42,6 +45,19 @@ public class NewOrderActivity extends BaseActivity {
     Spinner spn_carType;
     Spinner spn_priceType;
 
+    TextInputLayout title_layout;
+    TextInputLayout description_layout;
+    TextInputLayout district_layout;
+    TextInputLayout price_layout;
+
+    EditText title_text;
+    EditText description_text;
+    EditText district_text;
+    EditText price_text;
+
+    Button submit_bt;
+
+
     ArrayList<ImageView> images = new ArrayList<ImageView>();
 
     int current_image;
@@ -59,7 +75,7 @@ public class NewOrderActivity extends BaseActivity {
         navigationView.getMenu().findItem(R.id.mnu_newOrder).setChecked(true);
 
 
-//        --------------Change The Toolbar title and font---------------
+//-------------------------Change The Toolbar title and font---------------
         toolbar.setTitle("ثبت سفارش");
         for (int i = 0; i<toolbar.getChildCount();i++){
             View view = toolbar.getChildAt(i);
@@ -99,12 +115,23 @@ public class NewOrderActivity extends BaseActivity {
         images.add((ImageView)findViewById(R.id.img_selectImage3));
 
 
+        title_layout= (TextInputLayout) findViewById(R.id.edtLayout_newOrder_title);
+        description_layout = (TextInputLayout) findViewById(R.id.edtLayout_newOrder_description);
+        district_layout = (TextInputLayout)findViewById(R.id.edtLayout_newOrder_district);
+        price_layout = (TextInputLayout)findViewById(R.id.edtLayout_newOrder_price);
+
+        title_text = (EditText) findViewById(R.id.edt_newOrder_title);
+        description_text = (EditText)findViewById(R.id.edt_newOrder_description);
+        district_text = (EditText)findViewById(R.id.edt_newOrder_district);
+        price_text = (EditText) findViewById(R.id.edt_newOrder_price);
+
+        submit_bt = (Button) findViewById(R.id.btn_submit_order);
 
 //------------------------------------End------------------------------------------
 
 
 
-// ------------------------------spinner OstanHa-------------------------------
+// ------------------------------spinner Province-------------------------------
         ArrayAdapter<CharSequence> myadapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.province, R.layout.row);
         spn_province.setAdapter(myadapter);
 
@@ -128,7 +155,7 @@ public class NewOrderActivity extends BaseActivity {
         });
 //---------------------------------------------------------------------------
 
-// ------------------------spinerhaye CarType Va PriceType-----------------
+// ------------------------ CarType and PriceType Spinners -----------------
         myadapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.carType, R.layout.row);
         spn_carType.setAdapter(myadapter);
 
@@ -172,12 +199,125 @@ public class NewOrderActivity extends BaseActivity {
                 else {
                     show_delete_dialog();
                 }
-
             }
         });
 
-//----------------------------------End-----------------------------------------
         Arrays.fill(fill_images,false);
+//----------------------------------End-----------------------------------------
+
+
+
+//--------------------------- Set price Edit Text Visible and Invisible --------------------
+        spn_priceType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+
+                if(spn_priceType.getSelectedItemPosition()==2){
+                    price_layout.setVisibility(View.VISIBLE);
+                }
+                else {
+                    price_layout.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+//----------------------------------End-----------------------------------------
+
+//----------------------------- Set Focus on Title EditText --------------------
+
+        title_text.requestFocus();
+
+//----------------------------------End-----------------------------------------
+
+        submit_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean is_validate = true;
+
+            //validation inputs
+                //title validation
+                if(title_text.getText().toString().trim().length()>=4){
+                    title_layout.setErrorEnabled(false);
+
+                }else {
+                    title_layout.setError("عنوان آگهی باید حداقل 4 حرف باشد");
+                    title_layout.setErrorEnabled(true);
+                    is_validate=false;
+                }
+
+                //description validation
+                if(description_text.getText().toString().trim().length()>=10) {
+                    description_layout.setErrorEnabled(false);
+
+
+                }else {
+                    description_layout.setError("توضیحات آگهی باید حداقل 10 حرف باشد");
+                    description_layout.setErrorEnabled(true);
+                    is_validate=false;
+                }
+
+                //district validation
+                if(district_text.getText().toString().trim().length()>=10) {
+                    district_layout.setErrorEnabled(false);
+
+
+                }else {
+                    district_layout.setError("آدرس آگهی باید حداقل 4 حرف باشد");
+                    district_layout.setErrorEnabled(true);
+                    is_validate=false;
+                }
+
+                //car type Spinner validation
+                if(spn_carType.getSelectedItemPosition()==0){
+
+                    ((TextView)spn_carType.getSelectedView()).setError("");
+
+                }
+                //province Spinner validation
+                if(spn_province.getSelectedItemPosition()==0){
+
+                    ((TextView)spn_province.getSelectedView()).setError("");
+
+                }
+                //city Spinner validation
+                if(spn_city.getSelectedItemPosition()==0){
+
+                    ((TextView)spn_city.getSelectedView()).setError("");
+
+                }
+                //price type Spinner validation
+                if(spn_priceType.getSelectedItemPosition()==0){
+
+                    ((TextView)spn_priceType.getSelectedView()).setError("");
+
+                }
+                if(spn_priceType.getSelectedItemPosition()== 2){
+
+                    if(price_text.getText().toString().trim().length() == 0 || Integer.parseInt(price_text.getText().toString())<=0){
+
+                        price_layout.setError("قیمت وارد شده اشتباه است");
+                        price_layout.setErrorEnabled(true);
+                        is_validate=false;
+                    }
+                    else {
+                        price_layout.setErrorEnabled(false);
+                    }
+
+                }
+
+                else {
+                    price_layout.setErrorEnabled(true);
+                }
+            }
+        });
+
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -249,7 +389,7 @@ public class NewOrderActivity extends BaseActivity {
         builder.show();
 
     }
-//-----------------------------SHOW DELETE DIALOG FOR IMAGE-----------------------------
+//----------------------------- SHOW DELETE DIALOG FOR IMAGE-----------------------------
     public void show_delete_dialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(NewOrderActivity.this);
 
