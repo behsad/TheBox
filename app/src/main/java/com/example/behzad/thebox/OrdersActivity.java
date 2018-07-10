@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,8 +41,17 @@ public class OrdersActivity extends BaseActivity {
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OrdersActivity.this,NewOrderActivity.class);
-                startActivity(intent);
+
+                //check user login
+                if (settings.getInt("user_id",0)!=0){
+
+                    Intent intent = new Intent(getApplicationContext(),NewOrderActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getBaseContext(),"برای سفارش دادن باید عضو شوید",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

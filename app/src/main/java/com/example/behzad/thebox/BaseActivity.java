@@ -1,8 +1,11 @@
 package com.example.behzad.thebox;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +15,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.lang.reflect.Field;
@@ -24,11 +28,19 @@ public class BaseActivity extends AppCompatActivity {
      DrawerLayout drawer;
      NavigationView navigationView;
 
+     SharedPreferences settings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        settings = PreferenceManager.getDefaultSharedPreferences(this);
+        //for test
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("user_id",55);
+        editor.commit();
 
 //       ---------------------- mainInitial------------------------------------
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -73,8 +85,18 @@ public class BaseActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 }else if (id == R.id.mnu_newOrder){
+
+                    //check user login
+                    if (settings.getInt("user_id",0)!=0){
+
                     Intent intent = new Intent(getApplicationContext(),NewOrderActivity.class);
                     startActivity(intent);
+                    }else {
+                        Toast.makeText(getBaseContext(),"برای سفارش دادن باید عضو شوید",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(intent);
+                    }
+
 
                 }else if (id == R.id.mnu_account){
                     Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
