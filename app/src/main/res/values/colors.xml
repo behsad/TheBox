@@ -13,6 +13,7 @@
     <color name="myGrey200">#EEEEEE</color>
     <color name="myGrey300">#E0E0E0</color>
     <color name="myViolet500">#9C27B0</color>
+    <color name="myBlue500">#3F51B5</color>
 
     <!--transparent-->
     <color name="myTransparentBlack">#a2212121</color>

@@ -25,6 +25,7 @@
             android:text="تست"
             android:textSize="@dimen/myLargeFont"
             android:layout_marginTop="@dimen/my18dp"
+            android:typeface="monospace"
             android:layout_marginRight="@dimen/my8dp"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/img_preview"
@@ -34,6 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="تست"
+            android:typeface="monospace"
+            android:textColor="@color/myBlue500"
             android:textSize="@dimen/myMediumFont"
             android:layout_marginTop="60dp"
             android:layout_marginRight="@dimen/my8dp"
@@ -42,6 +45,7 @@
             />
         <TextView
             android:id="@+id/txt_order_location"
+            android:typeface="monospace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="تست"
@@ -51,6 +55,7 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/img_preview"
             />
+
 
     </RelativeLayout>
 

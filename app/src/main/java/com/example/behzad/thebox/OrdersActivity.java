@@ -1,7 +1,10 @@
 package com.example.behzad.thebox;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,6 +18,19 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -25,8 +41,11 @@ public class OrdersActivity extends BaseActivity {
     RecyclerView recyclerView;
     SwipeRefreshLayout swipe;
 
-    TextView txt_location_filter;
-    TextView txt_carType_filter;
+    TextView location_filter;
+    TextView car_type_filter;
+
+    DataAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +80,11 @@ public class OrdersActivity extends BaseActivity {
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(lm);
 
-        ArrayList<Ad> data_list = new ArrayList<Ad>();
+        new get_ad_list().execute();
+
+
+        /*
+        final ArrayList<Ad> data_list = new ArrayList<Ad>();
         Ad temp_ad = new Ad();
         temp_ad.ad_title = "عنوان آگهی";
         temp_ad.ad_location = "رشت";
@@ -78,6 +101,7 @@ public class OrdersActivity extends BaseActivity {
 
         final DataAdapter adapter = new DataAdapter(getApplicationContext(),data_list);
         recyclerView.setAdapter(adapter);
+
 
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -99,10 +123,21 @@ public class OrdersActivity extends BaseActivity {
             }
         });
 
-        txt_location_filter = (TextView) findViewById(R.id.txt_location_filter);
-        txt_carType_filter = (TextView) findViewById(R.id.txt_carType_filter);
+        */
 
-        txt_location_filter.setOnClickListener(new View.OnClickListener() {
+        location_filter = (TextView) findViewById(R.id.txt_location_filter);
+        car_type_filter = (TextView) findViewById(R.id.txt_carType_filter);
+
+        String[] province_list = getResources().getStringArray(R.array.province);
+        String[] car_type_list = getResources().getStringArray(R.array.carType);
+        province_list[0] = "همه استان ها";
+        car_type_list[0] = "همه وسایل";
+
+        location_filter.setText(province_list[settings.getInt("location_filter",0)]);
+        car_type_filter.setText(car_type_list[settings.getInt("car_type_filter",0)]);
+
+
+        location_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final ArrayList<String> list = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.province)));
@@ -112,7 +147,11 @@ public class OrdersActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        txt_location_filter.setText(list.get(i));
+                        location_filter.setText(list.get(i));
+
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putInt("location_filter",i);
+                        editor.commit();
 
 
                     }
@@ -120,7 +159,7 @@ public class OrdersActivity extends BaseActivity {
                 builder.show();
             }
         });
-        txt_carType_filter.setOnClickListener(new View.OnClickListener() {
+        car_type_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final ArrayList<String> list = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.carType)));
@@ -132,7 +171,11 @@ public class OrdersActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        txt_carType_filter.setText(list.get(i));
+                        car_type_filter.setText(list.get(i));
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putInt("car_type_filter",i);
+                        editor.commit();
+
 
 
                     }
@@ -142,13 +185,117 @@ public class OrdersActivity extends BaseActivity {
         });
 
 
-
-
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
         return true;
     }
+
+
+
+
+    public class get_ad_list extends AsyncTask<Void,Void,String>
+    {
+        ProgressDialog pd = new ProgressDialog(OrdersActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pd.setMessage("در حال دریافت اطلاعات");
+            pd.show();
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+            JSONObject get_ad_list = new JSONObject();
+            try {
+                get_ad_list.put("command","get_ad_list");
+                get_ad_list.put("location_filter",settings.getInt("location_filter",0));
+                get_ad_list.put("car_type_filter",settings.getInt("car_type_filter",0));
+                get_ad_list.put("last_ad_id",0);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            nameValuePairs.add(new BasicNameValuePair("myjson",get_ad_list.toString()));
+
+            try {
+
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost("http://192.168.43.38/thebox/command.php");
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
+
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                String response = EntityUtils.toString(httpResponse.getEntity());
+
+                if (response.startsWith("<thebox>") && response.endsWith("</thebox>")) {//response is valid
+
+                    response = response.replace("<thebox>", "").replace("</thebox>", "");
+
+                    final String finalResponse = response;
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+                            try {
+                                JSONArray ad_list = new JSONArray(finalResponse);
+
+                                ArrayList<JSONObject> data_list = new ArrayList<JSONObject>();
+
+                                for (int i = 0;i <ad_list.length();i++)
+                                {
+                                    data_list.add(ad_list.getJSONObject(i));
+                                }
+
+                                adapter = new DataAdapter(getApplicationContext(),data_list);
+                                recyclerView.setAdapter(adapter);
+                                //Toast.makeText(getBaseContext(),String.valueOf(ad_list.length()), Toast.LENGTH_SHORT).show();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+
+                }else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "خطا در در دریافت اطلاعات", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getBaseContext(), "خطا در دریافت اطلاعات", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+
+            return null;
+        }
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+             pd.hide();
+             pd.dismiss();
+
+        }
+    }
+
+
 }

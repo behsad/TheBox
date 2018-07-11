@@ -620,15 +620,27 @@ public class NewOrderActivity extends BaseActivity {
 
                     response = response.replace("<thebox>", "").replace("</thebox>", "");
 
-                    final String finalResponse = response;
-                    runOnUiThread(new Runnable() {
+                    if(response.trim().equals("ok")){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getBaseContext(), "سفارش شما ارسال شد", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        NewOrderActivity.this.finish();
+
+                    }else {
+                        runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(), finalResponse, Toast.LENGTH_SHORT).show();
-                            images.get(current_image).setImageResource(R.drawable.ic_add_image);
-                            fill_images[current_image] = false;
+                            Toast.makeText(getBaseContext(), "خطا در ارسال سفارش", Toast.LENGTH_SHORT).show();
+                           // images.get(current_image).setImageResource(R.drawable.ic_add_image);
+                           // fill_images[current_image] = false;
                         }
                     });
+
+                    }
 
 
 
@@ -637,8 +649,8 @@ public class NewOrderActivity extends BaseActivity {
                         @Override
                         public void run() {
                             Toast.makeText(getBaseContext(), "خطا در ارسال سفارش", Toast.LENGTH_SHORT).show();
-                            images.get(current_image).setImageResource(R.drawable.ic_add_image);
-                            fill_images[current_image] = false;
+                            //images.get(current_image).setImageResource(R.drawable.ic_add_image);
+                            //fill_images[current_image] = false;
                         }
                     });
 
@@ -650,8 +662,8 @@ public class NewOrderActivity extends BaseActivity {
                     @Override
                     public void run() {
                         Toast.makeText(getBaseContext(), "خطا در ارسال سفارش", Toast.LENGTH_SHORT).show();
-                        images.get(current_image).setImageResource(R.drawable.ic_add_image);
-                        fill_images[current_image] = false;
+                        //images.get(current_image).setImageResource(R.drawable.ic_add_image);
+                        //fill_images[current_image] = false;
                     }
                 });
             }
@@ -660,8 +672,8 @@ public class NewOrderActivity extends BaseActivity {
         }
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-//            pd.hide();
-//            pd.dismiss();
+             pd.hide();
+             pd.dismiss();
 
         }
     }

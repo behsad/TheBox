@@ -9,19 +9,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
-    ArrayList<Ad> data_list;
+    ArrayList<JSONObject> data_list;
     Context context;
 
-    public DataAdapter(Context context, ArrayList<Ad> data_list)
+    public DataAdapter(Context context, ArrayList<JSONObject> data_list)
     {
     this.context = context;
     this.data_list = data_list;
@@ -38,14 +44,58 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull DataAdapter.ViewHolder holder, int position) {
 
-        holder.txt_orderTitle.setText(data_list.get(position).ad_title);
-        holder.txt_orderLocation.setText(data_list.get(position).ad_location);
-        holder.txt_orderPrice.setText(data_list.get(position).ad_price);
-
-        //picasso.with(context) 19:00 E09 Sheypor.
-        Picasso.with(context).load(data_list.get(position).ad_image).resize(128,128).into(holder.img_preview);
+        try {
+            holder.txt_orderTitle.setText(data_list.get(position).getString("title"));
 
 
+            String[] province_list = context.getResources().getStringArray(R.array.province);
+            holder.txt_orderLocation.setText(province_list[data_list.get(position).getInt("province")]);
+
+            ArrayAdapter<CharSequence> myadapter = ArrayAdapter.createFromResource(context, context.getResources().getIdentifier("array/city" + data_list.get(position).getInt("province"), null, context.getPackageName()), R.layout.row);
+            holder.txt_orderLocation.setText(holder.txt_orderLocation.getText()+" - "+myadapter.getItem(data_list.get(position).getInt("city")));
+
+
+            if(data_list.get(position).getInt("price_type")==0)
+            {
+                holder.txt_orderPrice.setText("");
+
+            }else if(data_list.get(position).getInt("price_type")==1)
+            {
+                holder.txt_orderPrice.setText("قیمت توافقی");
+
+            }else if(data_list.get(position).getInt("price_type")==2)
+            {
+                //set US number format 20000 -> 20,000
+                NumberFormat numberFormat =  NumberFormat.getNumberInstance(Locale.US);
+                holder.txt_orderPrice.setText(numberFormat.format(data_list.get(position).getInt("price")) + " تومان ");
+            }
+
+            if(!data_list.get(position).getString("image1").equals("")){
+
+                Picasso.with(context).load("http://192.168.43.38/thebox/"+data_list.get(position).getString("image1")).resize(128,128).into(holder.img_preview);
+            }
+            else {
+                if(!data_list.get(position).getString("image2").equals("")){
+
+                    Picasso.with(context).load("http://192.168.43.38/thebox/"+data_list.get(position).getString("image2")).resize(128,128).into(holder.img_preview);
+                }
+                else {
+                    if(!data_list.get(position).getString("image3").equals("")){
+
+                        Picasso.with(context).load("http://192.168.43.38/thebox/"+data_list.get(position).getString("image3")).resize(128,128).into(holder.img_preview);
+                    }
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //holder.txt_orderLocation.setText(data_list.get(position).ad_location);
+        //holder.txt_orderPrice.setText(data_list.get(position).ad_price);
+
+        //Picasso.with(context).load(data_list.get(position).ad_image).resize(128,128).into(holder.img_preview);
+
+/*
         if(position >= getItemCount()-1){
            new Handler().postDelayed(new Runnable() {
                @Override
@@ -56,13 +106,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
                    temp_ad.ad_price = "65 تومان";
                    temp_ad.ad_image = "https://findicons.com/files/icons/1675/sketchy/128/box.png";
                    insert(getItemCount(),temp_ad);
-
-
-
                }
            },1);
         }
-
+*/
         holder.cardV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +128,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         return data_list.size();
     }
 
-    public void insert (int position, Ad data){
+    public void insert (int position, JSONObject data){
         data_list.add(position,data);
         notifyItemInserted(position);
     }
