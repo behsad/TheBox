@@ -44,7 +44,10 @@ public class OrdersActivity extends BaseActivity {
     TextView location_filter;
     TextView car_type_filter;
 
+    TextView not_found_text;
+
     DataAdapter adapter;
+    int last_ad_id = 0;
 
 
     @Override
@@ -74,56 +77,51 @@ public class OrdersActivity extends BaseActivity {
             }
         });
 
+        not_found_text = (TextView) findViewById(R.id.txt_not_found);
+
         recyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(lm);
 
+
+        ArrayList<JSONObject> data_list = new ArrayList<JSONObject>();
+
+        adapter = new DataAdapter(getApplicationContext(), data_list) {
+            @Override
+            public void load_more() {
+                if (last_ad_id != -1) {
+                    new get_ad_list().execute();
+                }
+
+            }
+        };
+        recyclerView.setAdapter(adapter);
+
         new get_ad_list().execute();
 
 
-        /*
-        final ArrayList<Ad> data_list = new ArrayList<Ad>();
-        Ad temp_ad = new Ad();
-        temp_ad.ad_title = "عنوان آگهی";
-        temp_ad.ad_location = "رشت";
-        temp_ad.ad_price = "12 تومان";
-        temp_ad.ad_image = "http://www.upsara.com/images/5lbx_logoo2.png";
-
-        data_list.add(temp_ad);
-        data_list.add(temp_ad);
-        data_list.add(temp_ad);
-        data_list.add(temp_ad);
-        data_list.add(temp_ad);
-        data_list.add(temp_ad);
-        data_list.add(temp_ad);
-
-        final DataAdapter adapter = new DataAdapter(getApplicationContext(),data_list);
-        recyclerView.setAdapter(adapter);
 
 
+//------------------refresh the list with SwipeRefreshLayout----------------------
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
-                ArrayList<Ad> data_list = new ArrayList<Ad>();
-                Ad temp_ad = new Ad();
-                temp_ad.ad_title = "عنوان آگهی دوم";
-                temp_ad.ad_location = "تهران";
-                temp_ad.ad_price = "100 تومان";
-                temp_ad.ad_image = "http://www.upsara.com/images/5lbx_logoo2.png";
+                not_found_text.setVisibility(View.GONE);
 
-                adapter.insert(adapter.getItemCount(),temp_ad);
+                last_ad_id = 0;
 
+                adapter.clear_list();
 
+                new get_ad_list().execute();
 
                 swipe.setRefreshing(false);
             }
         });
 
-        */
 
         location_filter = (TextView) findViewById(R.id.txt_location_filter);
         car_type_filter = (TextView) findViewById(R.id.txt_carType_filter);
@@ -147,18 +145,30 @@ public class OrdersActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        location_filter.setText(list.get(i));
 
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putInt("location_filter",i);
-                        editor.commit();
+                        if (!location_filter.getText().toString().equals(list.get(i))){
 
+                            location_filter.setText(list.get(i));
+
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putInt("location_filter",i);
+                            editor.commit();
+
+                            //refresh the list
+                            last_ad_id = 0;
+                            adapter.clear_list();
+
+                            not_found_text.setVisibility(View.GONE);
+
+                            new get_ad_list().execute();
+                        }
 
                     }
                 });
                 builder.show();
             }
         });
+
         car_type_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,11 +180,21 @@ public class OrdersActivity extends BaseActivity {
                 builder.setAdapter(new ArrayAdapter<String>(OrdersActivity.this,R.layout.row,R.id.txt_mytxt,list), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        if (!car_type_filter.getText().toString().equals(list.get(i))){
 
-                        car_type_filter.setText(list.get(i));
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putInt("car_type_filter",i);
-                        editor.commit();
+                            car_type_filter.setText(list.get(i));
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putInt("car_type_filter",i);
+                            editor.commit();
+
+                            //refresh the list
+                            last_ad_id = 0;
+                            adapter.clear_list();
+
+                            not_found_text.setVisibility(View.GONE);
+
+                            new get_ad_list().execute();
+                        }
 
 
 
@@ -218,7 +238,7 @@ public class OrdersActivity extends BaseActivity {
                 get_ad_list.put("command","get_ad_list");
                 get_ad_list.put("location_filter",settings.getInt("location_filter",0));
                 get_ad_list.put("car_type_filter",settings.getInt("car_type_filter",0));
-                get_ad_list.put("last_ad_id",0);
+                get_ad_list.put("last_ad_id",last_ad_id);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -248,15 +268,24 @@ public class OrdersActivity extends BaseActivity {
                             try {
                                 JSONArray ad_list = new JSONArray(finalResponse);
 
-                                ArrayList<JSONObject> data_list = new ArrayList<JSONObject>();
-
-                                for (int i = 0;i <ad_list.length();i++)
-                                {
-                                    data_list.add(ad_list.getJSONObject(i));
+                                if (ad_list.length() == 0 && last_ad_id == 0){
+                                    not_found_text.setVisibility(View.VISIBLE);
                                 }
 
-                                adapter = new DataAdapter(getApplicationContext(),data_list);
-                                recyclerView.setAdapter(adapter);
+                                if (ad_list.length() != 0){
+                                last_ad_id = ad_list.getJSONObject(ad_list.length()-1).getInt("id");
+
+                                    if (ad_list.length() != 10){
+                                        last_ad_id = -1;
+                                    }
+
+                                }
+                                else {
+                                    last_ad_id = -1;
+                                }
+
+                                adapter.insert(adapter.getItemCount(),ad_list);
+
                                 //Toast.makeText(getBaseContext(),String.valueOf(ad_list.length()), Toast.LENGTH_SHORT).show();
 
                             } catch (JSONException e) {

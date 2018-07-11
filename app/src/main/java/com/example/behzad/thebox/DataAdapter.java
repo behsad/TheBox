@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +23,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
+public abstract class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     ArrayList<JSONObject> data_list;
     Context context;
@@ -90,26 +91,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //holder.txt_orderLocation.setText(data_list.get(position).ad_location);
-        //holder.txt_orderPrice.setText(data_list.get(position).ad_price);
 
-        //Picasso.with(context).load(data_list.get(position).ad_image).resize(128,128).into(holder.img_preview);
 
-/*
         if(position >= getItemCount()-1){
-           new Handler().postDelayed(new Runnable() {
-               @Override
-               public void run() {
-                   Ad temp_ad = new Ad();
-                   temp_ad.ad_title = "عنوان آگهی سوم";
-                   temp_ad.ad_location = "قزوین";
-                   temp_ad.ad_price = "65 تومان";
-                   temp_ad.ad_image = "https://findicons.com/files/icons/1675/sketchy/128/box.png";
-                   insert(getItemCount(),temp_ad);
-               }
-           },1);
+            load_more();
         }
-*/
+
+
+
         holder.cardV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,17 +109,33 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
                 context.startActivity(i);
             }
         });
-
     }
+
+    public abstract  void load_more();
 
     @Override
     public int getItemCount() {
         return data_list.size();
     }
 
-    public void insert (int position, JSONObject data){
-        data_list.add(position,data);
+    public void insert (int position, JSONArray ad_list){
+        try {
+            for (int i = 0 ; i < ad_list.length();i++)
+            {
+
+                data_list.add(ad_list.getJSONObject(i));
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         notifyItemInserted(position);
+    }
+
+    public void clear_list(){
+        int size = data_list.size();
+        data_list.clear();
+        notifyItemRangeRemoved(0,size);
     }
 
 

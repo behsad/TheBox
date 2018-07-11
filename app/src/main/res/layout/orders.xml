@@ -65,6 +65,19 @@
         android:src="@drawable/ic_add"/>
 
 
+    <TextView
+        android:id="@+id/txt_not_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:typeface="monospace"
+        android:textColor="@color/myGrey50"
+        android:textSize="@dimen/myLargeFont"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/no_data_text"
+        android:visibility="gone"/>
+
+
 
 
 </android.support.design.widget.CoordinatorLayout>
