@@ -21,8 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.SearchView;
 
-
-
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -204,8 +202,6 @@ public class OrdersActivity extends BaseActivity {
 
                             new get_ad_list().execute();
                         }
-
-
 
                     }
                 });

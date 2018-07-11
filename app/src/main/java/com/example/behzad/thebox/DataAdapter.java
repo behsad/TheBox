@@ -43,7 +43,7 @@ public abstract class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewH
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DataAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DataAdapter.ViewHolder holder, final int position) {
 
         try {
             holder.txt_orderTitle.setText(data_list.get(position).getString("title"));
@@ -54,6 +54,9 @@ public abstract class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewH
 
             ArrayAdapter<CharSequence> myadapter = ArrayAdapter.createFromResource(context, context.getResources().getIdentifier("array/city" + data_list.get(position).getInt("province"), null, context.getPackageName()), R.layout.row);
             holder.txt_orderLocation.setText(holder.txt_orderLocation.getText()+" - "+myadapter.getItem(data_list.get(position).getInt("city")));
+
+            int second = (int)((System.currentTimeMillis()/1000) - data_list.get(position).getInt("date"));
+            holder.txt_orderLocation.setText(holder.txt_orderLocation.getText() + " / " + second + "ثانیه پیش");
 
 
             if(data_list.get(position).getInt("price_type")==0)
@@ -105,7 +108,8 @@ public abstract class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewH
                 Intent i = new Intent(context,ShowOrderActivity.class);
                 //--chon context dar yek class dige hast bayad in code ro ezafe bokonim
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                //--
+                i.putExtra("ad",data_list.get(position).toString());
+
                 context.startActivity(i);
             }
         });

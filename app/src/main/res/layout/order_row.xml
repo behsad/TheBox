@@ -16,7 +16,7 @@
             android:layout_width="@dimen/myImagePreview"
             android:layout_height="@dimen/myImagePreview"
             android:layout_alignParentRight="true"
-            android:layout_margin="@dimen/my8dp"
+
             android:src="@drawable/testimage" />
         <TextView
             android:id="@+id/txt_order_title"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:text="تست"
             android:textSize="@dimen/myMediumFont"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="92dp"
             android:layout_marginRight="@dimen/my8dp"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/img_preview"

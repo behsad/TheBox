@@ -16,9 +16,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -36,22 +40,32 @@ public class ShowOrderActivity extends BaseActivity {
 
     FloatingActionButton call_bt;
 
+    JSONObject ad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FrameLayout content_frame = (FrameLayout) findViewById(R.id.content_frame);
-        getLayoutInflater().inflate(R.layout.show_order,content_frame);
+        getLayoutInflater().inflate(R.layout.show_order, content_frame);
+
+        //receiving data from order activity
+        try {
+            ad = new JSONObject(getIntent().getStringExtra("ad"));
+            //Toast.makeText(getApplicationContext(), ad.getString("id"), Toast.LENGTH_LONG).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         toolbar.setTitle("");
 
-        //        -------------------Change The Toolbar icon-----------------
+        //------------------------ Change The Toolbar icon-----------------
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable arrow = getResources().getDrawable(R.drawable.ic_arrow_forward);
         getSupportActionBar().setHomeAsUpIndicator(arrow);
 
-//        ----------------------change toolbar action----------------
+//        ---------------------- change toolbar action----------------
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +77,42 @@ public class ShowOrderActivity extends BaseActivity {
 //------------------------------------End------------------------------------------
 
 //-----------------------------Setup Slider--------------------------------------------
-        slider = (SliderLayout)findViewById(R.id.slider);
+        slider = (SliderLayout) findViewById(R.id.slider);
 
-        DefaultSliderView sliderView = new DefaultSliderView(this);
-        sliderView.image("http://www.upsara.com/images/ps4f_logoo.png");
-        slider.addSlider(sliderView);
+       // DefaultSliderView sliderView = new DefaultSliderView(this);
+
+        try {
+
+            if (ad.getString("image1").trim().equals("") && ad.getString("image2").trim().equals("") && ad.getString("image3").trim().equals("")) {
+                DefaultSliderView sliderView = new DefaultSliderView(this);
+                sliderView.image("http://www.upsara.com/images/ps4f_logoo.png");
+            }else {
+
+
+                if(!ad.getString("image1").trim().equals(""))
+                {
+                    DefaultSliderView sliderView = new DefaultSliderView(this);
+                    sliderView.image("http://192.168.43.38/thebox/"+ad.getString("image1").trim());
+                    slider.addSlider(sliderView);
+                }
+                if(!ad.getString("image2").trim().equals(""))
+                {
+                    DefaultSliderView sliderView = new DefaultSliderView(this);
+                    sliderView.image("http://192.168.43.38/thebox/"+ad.getString("image2").trim());
+                    slider.addSlider(sliderView);
+                }
+                if(!ad.getString("image3").trim().equals(""))
+                {
+                    DefaultSliderView sliderView = new DefaultSliderView(this);
+                    sliderView.image("http://192.168.43.38/thebox/"+ad.getString("image3").trim());
+                    slider.addSlider(sliderView);
+                }
+
+            }
+        } catch (Exception e) {
+
+        }
+
         slider.stopAutoCycle();
 
 
@@ -81,7 +126,7 @@ public class ShowOrderActivity extends BaseActivity {
                 list.add("ارسال پیامک");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ShowOrderActivity.this);
-                builder.setAdapter(new ArrayAdapter<String>(ShowOrderActivity.this,R.layout.row,R.id.txt_mytxt,list), new DialogInterface.OnClickListener() {
+                builder.setAdapter(new ArrayAdapter<String>(ShowOrderActivity.this, R.layout.row, R.id.txt_mytxt, list), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -94,21 +139,20 @@ public class ShowOrderActivity extends BaseActivity {
         });
 
 
-
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.like_share_menu, menu);
         return true;
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId()==R.id.share){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.share) {
 
 
-
-        }else if(item.getItemId()==R.id.bookmark){
+        } else if (item.getItemId() == R.id.bookmark) {
 
             item.setIcon(R.drawable.ic_filled_star);
 
