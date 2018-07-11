@@ -7,16 +7,21 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.SearchView;
+
+
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -35,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
+
+
 public class OrdersActivity extends BaseActivity {
 
     FloatingActionButton fb;
@@ -48,6 +55,8 @@ public class OrdersActivity extends BaseActivity {
 
     DataAdapter adapter;
     int last_ad_id = 0;
+
+    String search_key = "";
 
 
     @Override
@@ -209,6 +218,47 @@ public class OrdersActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.btn_ActionBar_search);
+
+        //change search text and font
+        if(searchItem != null){
+            SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+            TextView searchText = (TextView)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+            searchText.setTypeface(myfont);
+
+            searchView.setQueryHint("جستجو");
+
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+
+                    search_key = query;
+
+                    last_ad_id = 0;
+                    adapter.clear_list();
+                    new get_ad_list().execute();
+
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+
+                    if (newText.equals(""))
+                    {
+                        search_key = "";
+                        last_ad_id = 0;
+                        adapter.clear_list();
+                        new get_ad_list().execute();
+
+                        not_found_text.setVisibility(View.GONE);
+                    }
+                    return false;
+                }
+            });
+        }
+
         return true;
     }
 
@@ -238,7 +288,9 @@ public class OrdersActivity extends BaseActivity {
                 get_ad_list.put("command","get_ad_list");
                 get_ad_list.put("location_filter",settings.getInt("location_filter",0));
                 get_ad_list.put("car_type_filter",settings.getInt("car_type_filter",0));
+                get_ad_list.put("search_key",search_key);
                 get_ad_list.put("last_ad_id",last_ad_id);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
