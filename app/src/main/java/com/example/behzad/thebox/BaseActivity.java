@@ -112,7 +112,7 @@ public class BaseActivity extends AppCompatActivity {
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_SUBJECT,"جعبه");
-                    intent.putExtra(Intent.EXTRA_TEXT,"با نصب جعبه میتونید محموله خود را ارسال کنید");
+                    intent.putExtra(Intent.EXTRA_TEXT,"با نصب جعبه میتونید محموله خود را به هر جای  ایران ارسال کنید\n\n لینک دانلود :\n example.com");
 
                     startActivity(Intent.createChooser(intent,"یک برنامه را انتخاب کنید"));
 

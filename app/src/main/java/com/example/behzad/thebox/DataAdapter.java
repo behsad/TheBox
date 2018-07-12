@@ -55,8 +55,22 @@ public abstract class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewH
             ArrayAdapter<CharSequence> myadapter = ArrayAdapter.createFromResource(context, context.getResources().getIdentifier("array/city" + data_list.get(position).getInt("province"), null, context.getPackageName()), R.layout.row);
             holder.txt_orderLocation.setText(holder.txt_orderLocation.getText()+" - "+myadapter.getItem(data_list.get(position).getInt("city")));
 
-            int second = (int)((System.currentTimeMillis()/1000) - data_list.get(position).getInt("date"));
-            holder.txt_orderLocation.setText(holder.txt_orderLocation.getText() + " / " + second + "ثانیه پیش");
+            int seconds = (int)((System.currentTimeMillis()/1000) - data_list.get(position).getInt("date"));
+            String temp = "";
+            if (seconds<60)
+            {
+                temp = "چند لحظه پیش";
+            }else if(seconds >= 60 && seconds < 3600) {
+
+                temp= (seconds / 60)+" دقیقه پیش ";
+            }else
+            {
+                temp= (seconds / 3600)+" ساعت پیش ";
+
+            }
+
+
+           holder.txt_orderLocation.setText(holder.txt_orderLocation.getText() + " / " + temp);
 
 
             if(data_list.get(position).getInt("price_type")==0)

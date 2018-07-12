@@ -284,6 +284,7 @@ public class OrdersActivity extends BaseActivity {
                 get_ad_list.put("command","get_ad_list");
                 get_ad_list.put("location_filter",settings.getInt("location_filter",0));
                 get_ad_list.put("car_type_filter",settings.getInt("car_type_filter",0));
+                get_ad_list.put("user_id",settings.getInt("user_id",0));
                 get_ad_list.put("search_key",search_key);
                 get_ad_list.put("last_ad_id",last_ad_id);
 
@@ -347,7 +348,7 @@ public class OrdersActivity extends BaseActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(), "خطا در در دریافت اطلاعات", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "خطا در دریافت اطلاعات", Toast.LENGTH_SHORT).show();
                         }
                     });
 
