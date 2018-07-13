@@ -128,6 +128,7 @@ public class OrdersActivity extends BaseActivity {
                 swipe.setRefreshing(false);
             }
         });
+//----------------------------------END----------------------------------------
 
 
         location_filter = (TextView) findViewById(R.id.txt_location_filter);

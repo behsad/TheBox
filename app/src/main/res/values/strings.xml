@@ -10,7 +10,7 @@
     <string name="app_description">سامانه هوشمند حمل بار</string>
 
     <!--NavBar Strings-->
-    <string name="navBar_orders">سفارش ها</string>
+    <string name="navBar_orders"> همه سفارش ها</string>
     <string name="navBar_newOrder">ثبت سفارش</string>
     <string name="navBar_userInfo">اطلاعات کاربری</string>
     <string name="navBar_exit">خروج</string>

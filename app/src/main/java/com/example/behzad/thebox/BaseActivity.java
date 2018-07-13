@@ -110,8 +110,15 @@ public class BaseActivity extends AppCompatActivity {
 
 
                 }else if (id== R.id.mnu_favorite){
-                    Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
-                    startActivity(intent);
+                    if (settings.getInt("user_id",0)!=0){
+
+                        Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(getBaseContext(),"برای مشاهده نشان شده ها باید عضو شوید",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(intent);
+                    }
 
                 }else if (id== R.id.mnu_share){
 
