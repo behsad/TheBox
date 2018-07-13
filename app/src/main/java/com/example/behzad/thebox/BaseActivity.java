@@ -39,8 +39,8 @@ public class BaseActivity extends AppCompatActivity {
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         //for test
         SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("user_id",55);
-        editor.commit();
+//        editor.putInt("user_id",55);
+//        editor.commit();
 
 //       ---------------------- mainInitial------------------------------------
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -99,8 +99,15 @@ public class BaseActivity extends AppCompatActivity {
 
 
                 }else if (id == R.id.mnu_account){
-                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                    startActivity(intent);
+                    if (settings.getInt("user_id",0)!=0){
+                        Intent intent = new Intent(getApplicationContext(),AccountActivity.class);
+                        startActivity(intent);
+
+                    }else {
+                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(intent);
+                    }
+
 
                 }else if (id== R.id.mnu_favorite){
                     Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);

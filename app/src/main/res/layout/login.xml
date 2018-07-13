@@ -16,37 +16,41 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/login_layout"
                 style="@style/MyNewOrderLinearLayoutStyle">
 
                 <TextView
                     style="@style/MyTextViewStyle"
                     android:text="@string/login_phone_number_guide_text"/>
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/txt_login_phoneNumber"
+                    android:id="@+id/edtLayout_login_phoneNumber"
                     style="@style/MyNewOrderStyle">
 
                 <EditText
+                    android:id="@+id/edt_login_phoneNumber"
                     style="@style/MyNewOrderEditTextStyle"
                     android:hint="@string/login_phone_text"
                     android:inputType="phone"
                     android:maxLength="11" />
 
                 </android.support.design.widget.TextInputLayout><android.support.design.widget.TextInputLayout
-                android:id="@+id/txt_login_email"
+                android:id="@+id/edtLayout_login_email"
                 style="@style/MyNewOrderStyle">
 
                 <EditText
+                    android:id="@+id/edt_login_email"
                     style="@style/MyNewOrderEditTextStyle"
                     android:hint="@string/login_email_text" />
             </android.support.design.widget.TextInputLayout>
 
+                <Button
+                    android:id="@+id/btn_login_receive_verifyCode"
+                    style="@style/MySubmitButtonStyle"
+                    android:text="@string/login_verifyCode_button_text"/>
             </LinearLayout>
-            <Button
-                android:id="@+id/btn_receive_verifyCode"
-                style="@style/MySubmitButtonStyle"
-                android:text="@string/login_verifyCode_button_text"/>
 
             <LinearLayout
+                android:id="@+id/activation_layout"
                 style="@style/MyNewOrderLinearLayoutStyle"
                 android:visibility="gone">
 
@@ -54,10 +58,11 @@
                     style="@style/MyTextViewStyle"
                     android:text="@string/login_enter_verifyCode_text"/>
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/edt_login_verify"
+                    android:id="@+id/edtLayout_login_verify"
                     style="@style/MyNewOrderStyle">
 
                     <EditText
+                        android:id="@+id/edt_login_verify"
                         style="@style/MyNewOrderEditTextStyle"
                         android:hint="@string/login_verifyCode_text"
                         android:inputType="number"
@@ -65,7 +70,7 @@
 
                 </android.support.design.widget.TextInputLayout>
                 <Button
-                    android:id="@+id/btn_submit_verifyCode"
+                    android:id="@+id/btn_login_submit_verifyCode"
                     style="@style/MySubmitButtonStyle"
                     android:text="@string/login_submit_verifyCode_button_text"/>
 

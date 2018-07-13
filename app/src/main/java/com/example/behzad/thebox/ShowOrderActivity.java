@@ -68,7 +68,6 @@ public class ShowOrderActivity extends BaseActivity {
     JSONObject user_contact_details;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,9 +84,6 @@ public class ShowOrderActivity extends BaseActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
 
         ad_title = (TextView) findViewById(R.id.txt_showOrder_title);
         ad_price = (TextView) findViewById(R.id.txt_showOrder_price);
@@ -130,8 +126,6 @@ public class ShowOrderActivity extends BaseActivity {
 
             String[] car_type_list = getResources().getStringArray(R.array.carType);
             ad_car_type.setText(car_type_list[ad.getInt("car_type")]);
-
-
 
 
         } catch (JSONException e) {
@@ -182,7 +176,6 @@ public class ShowOrderActivity extends BaseActivity {
                     sliderView.image("http://192.168.43.38/thebox/" + ad.getString("image3").trim());
                     slider.addSlider(sliderView);
                 }
-
             }
         } catch (Exception e) {
 
@@ -248,7 +241,6 @@ public class ShowOrderActivity extends BaseActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
     public class bookmark_ad extends AsyncTask<Void,Void,String>
     {
@@ -365,8 +357,6 @@ public class ShowOrderActivity extends BaseActivity {
         }
     }
 
-
-
     public class get_contact_details extends AsyncTask<Void,Void,String>
     {
         ProgressDialog pd = new ProgressDialog(ShowOrderActivity.this);
@@ -377,7 +367,6 @@ public class ShowOrderActivity extends BaseActivity {
 
             pd.setMessage("در حال دریافت اطلاعات");
             pd.show();
-
         }
 
         @Override
@@ -494,8 +483,6 @@ public class ShowOrderActivity extends BaseActivity {
 
                     }
 
-
-
                 }else {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -516,7 +503,6 @@ public class ShowOrderActivity extends BaseActivity {
                     }
                 });
             }
-
             return null;
         }
         protected void onPostExecute(String result) {
@@ -526,5 +512,4 @@ public class ShowOrderActivity extends BaseActivity {
 
         }
     }
-
 }
